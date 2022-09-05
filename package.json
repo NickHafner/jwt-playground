@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:ts && fastify start -l info dist/app.js",
+    "start": "npm run build:ts && fastify start -l info dist/src/app.js",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec node --inspect -r ts-node/register src/server.ts",
     "build:ts": "tsc",
-    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\"  \"tsc -w\" \"fastify start -w -l info -P dist/app.js\""
+    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\"  \"tsc -w\" \"fastify start -w -l info -P dist/src/app.js\""
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,10 @@
   "dependencies": {
     "@fastify/autoload": "^5.3.1",
     "@fastify/jwt": "^6.3.2",
+    "@fastify/sensible": "^5.1.1",
     "dotenv": "^16.0.2",
     "fastify": "^4.5.3",
+    "fastify-cli": "^5.4.1",
     "get-jwks": "^8.0.0"
   },
   "devDependencies": {
