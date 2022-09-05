@@ -1,7 +1,7 @@
-import { join } from 'path';
+import { join } from "path";
 import { FastifyPluginAsync } from "fastify";
-import fastifyAutoload from '@fastify/autoload';
-import { loadEnv } from '../utils';
+import fastifyAutoload from "@fastify/autoload";
+import { loadEnv } from "../utils";
 
 const appConfig = {
   appOrigin:

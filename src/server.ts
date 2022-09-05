@@ -4,7 +4,7 @@ const Fastify = require("fastify");
 const fjwt = require("@fastify/jwt");
 const buildGetJwks = require("get-jwks");
 
-import app from './app';
+import app from "./app";
 
 dotenv.config();
 
@@ -30,7 +30,7 @@ fastify.addHook("onRequest", async (request: any, reply: FastifyReply) => {
   await request.jwtVerify();
 });
 
-fastify.register(app)
+fastify.register(app);
 
 fastify.listen({ port: 3000 }, function (err: any, address: any) {
   if (err) {

@@ -13,8 +13,10 @@
   ],
   "rules": {
     "complexity": ["warn", 10],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "prefer-const": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-var-requires": 0,
     "padding-line-between-statements": [
       "error",
       {
