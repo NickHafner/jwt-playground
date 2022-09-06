@@ -1,1 +1,1 @@
-export { default as loadEnv } from "./loadEnv";
+export { default as loadEnv } from "./loadEnv";
