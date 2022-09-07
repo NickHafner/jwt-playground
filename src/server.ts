@@ -1,15 +1,24 @@
-import { FastifyReply } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
 import * as dotenv from "dotenv";
+import fjwt from "@fastify/jwt";
+import buildGetJwks from "get-jwks";
 const Fastify = require("fastify");
-const fjwt = require("@fastify/jwt");
-const buildGetJwks = require("get-jwks");
 
-import app from "./app";
+import app, { appConfig } from "./app";
 
 dotenv.config();
 
 const fastify = Fastify()({
-  logger: true,
+  trustProxy: true,
+  logger: {
+    level: process.env.LOG_LEVEL || "error",
+    prettifier: require("pino-pretty"),
+    prettyPrint: {
+      errorProps: "hint, detail",
+      levelFirst: true,
+      crlf: true,
+    },
+  },
 });
 const getJwks = buildGetJwks();
 
@@ -26,13 +35,13 @@ fastify.register(fjwt, {
   },
 });
 
-fastify.addHook("onRequest", async (request: any, reply: FastifyReply) => {
+fastify.addHook("onRequest", async (request: FastifyRequest, reply: FastifyReply) => {
   await request.jwtVerify();
 });
 
 fastify.register(app);
 
-fastify.listen({ port: 3000 }, function (err: any, address: any) {
+fastify.listen({ port: appConfig.port }, function (err: any, address: any) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

@@ -3,8 +3,9 @@ import { FastifyPluginAsync } from "fastify";
 import fastifyAutoload from "@fastify/autoload";
 import { loadEnv } from "../utils";
 
-const appConfig = {
+export const appConfig = {
   appOrigin: loadEnv("CONN_PROTO") + loadEnv("HOSTNAME") + ":" + loadEnv("PORT"),
+  port: loadEnv("PORT"),
 };
 
 const app: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
