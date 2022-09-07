@@ -5,4 +5,4 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     return "this is an example";
   });
 };
-export default example;
+module.exports = example;

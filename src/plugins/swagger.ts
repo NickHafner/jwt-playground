@@ -1,5 +1,6 @@
 import fp from "fastify-plugin";
 import fastifySwagger, { SwaggerOptions } from "@fastify/swagger";
+const logger = require("pino")();
 
 /**
  * This plugins adds swager to our api
@@ -7,12 +8,13 @@ import fastifySwagger, { SwaggerOptions } from "@fastify/swagger";
  * @see https://github.com/fastify/fastify-sensible
  */
 module.exports = fp<SwaggerOptions>(
-  async (fastify: any, opts: any, next: any) => {
+  async (fastify, opts) => {
+    logger.info("Loading swagger plugin");
     fastify.register(fastifySwagger, {
       routePrefix: "/swagger",
       swagger: {
         info: {
-          title: "Random testing API",
+          title: "Random Testing API",
           description: "CRUD Notes",
           version: "0.1.0",
         },
@@ -27,8 +29,6 @@ module.exports = fp<SwaggerOptions>(
       },
       exposeRoute: true,
     });
-
-    next();
   },
   { name: "swagger" }
 );

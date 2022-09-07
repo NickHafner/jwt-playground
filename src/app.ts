@@ -1,12 +1,7 @@
 import { join } from "path";
 import { FastifyPluginAsync } from "fastify";
 import fastifyAutoload from "@fastify/autoload";
-import { loadEnv } from "../utils";
-
-export const appConfig = {
-  appOrigin: loadEnv("CONN_PROTO") + loadEnv("HOSTNAME") + ":" + loadEnv("PORT"),
-  port: loadEnv("PORT"),
-};
+import { appConfig, AppConfig } from "../utils/appConfig";
 
 const app: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.decorate("appConfig", appConfig);
@@ -22,8 +17,7 @@ const app: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
 export default app;
 export { app };
-
-type AppConfig = typeof appConfig;
+module.exports = app;
 declare module "fastify" {
   export interface FastifyInstance {
     appConfig: AppConfig;
